@@ -1,18 +1,30 @@
-import "./styles/App.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
 import VideoPage from "./components/VideoPage/VideoPage";
+import information from "./information.json";
 
+import "./css/style.css";
 
 function App() {
-
+  
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/video" component={VideoPage} />
+      <Route
+            path="/"
+            exact
+            render={() => <HomePage />}
+            information={information}
+          />
+          <Route
+            path="/video/:id"
+            render={({ match }) => (
+              <VideoPage match={match} information={information} />
+            )}
+            information={information}
+          />
       </Switch>
     </Router>
   );
